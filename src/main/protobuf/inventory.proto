@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "example.myapp.inventory.grpc";
+option java_outer_classname = "InventoryRecordProto";
+import "google/protobuf/empty.proto";
+
+message InventoryRecord {
+  string name = 1;
+  string description = 2;
+  string unitPrice = 3;
+  int32 quantityInStock = 4;
+  int32 inventoryValue = 5;
+  int32 reorderLevel = 6;
+  int32 reorderTimeInDays = 7;
+  int32 quantityInReorder = 8;
+  string discontinued = 9;
+}
+
+message AddInventoryRecordRequest {
+  string ID = 1;
+  InventoryRecord record = 2;
+}
+
+message UpdateInventoryAttributeRequest {
+  string keyName = 1;
+  string attributeName = 2;
+  string newValue = 3;
+}
+
+message SearchByIDRequest {
+  string ID = 1;
+}
+
+message SearchResponse {
+  InventoryRecord record = 1;
+}
+
+message SearchByKeyValueRequest {
+  string keyName = 1;
+  string keyValue = 2;
+}
+
+message GetDistributionRequest {
+  string keyName = 1;
+  double percentileValue = 2;
+}
+
+message GetDistributionResponse {
+  double distributionValue = 1;
+}
+
+service InventoryService {
+  rpc AddInventoryRecord(AddInventoryRecordRequest) returns (google.protobuf.Empty);
+  rpc UpdateInventoryAttribute(UpdateInventoryAttributeRequest) returns (google.protobuf.Empty);
+  rpc SearchByID(SearchByIDRequest) returns (SearchResponse);
+  rpc SearchByKeyValue(SearchByKeyValueRequest) returns (SearchResponse);
+  rpc GetDistribution(GetDistributionRequest) returns (GetDistributionResponse);
+}
