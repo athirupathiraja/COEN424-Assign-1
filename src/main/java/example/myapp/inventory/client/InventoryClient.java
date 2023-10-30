@@ -45,6 +45,34 @@ public class InventoryClient {
 
             // Add more client calls
 
+            UpdateInventoryAttributeRequest updateRequest = UpdateInventoryAttributeRequest.newBuilder()
+                    .setKeyName("IN0026")
+                    .setAttributeName("quantityInStock")
+                    .setNewValue("60")
+                    .build();
+
+            Empty updateResponse = blockingStub.updateInventoryAttribute(updateRequest);
+            System.out.println("Update Inventory Attribute Response: " + updateResponse);
+
+// Example: Searching for a record by key and value
+            SearchByKeyValueRequest searchByKeyValueRequest = SearchByKeyValueRequest.newBuilder()
+                    .setKeyName("name")
+                    .setKeyValue("Item 26")
+                    .build();
+
+            SearchResponse searchByKeyValueResponse = blockingStub.searchByKeyValue(searchByKeyValueRequest);
+            System.out.println("Search By Key and Value Response: " + searchByKeyValueResponse);
+
+// Example: Getting distribution for a record
+            GetDistributionRequest getDistributionRequest = GetDistributionRequest.newBuilder()
+                    .setKeyName("IN0026")
+                    .setPercentileValue(0.9)
+                    .build();
+
+            GetDistributionResponse getDistributionResponse = blockingStub.getDistribution(getDistributionRequest);
+            System.out.println("Get Distribution Response: " + getDistributionResponse);
+
+
         } finally {
             channel.shutdown();
         }
