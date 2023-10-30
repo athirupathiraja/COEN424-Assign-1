@@ -187,6 +187,38 @@ public final class InventoryServiceGrpc {
      return getGetDistributionMethod;
   }
 
+  private static volatile io.grpc.MethodDescriptor<example.myapp.inventory.grpc.SearchRangeRequest,
+      example.myapp.inventory.grpc.SearchRangeResponse> getSearchMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "Search",
+      requestType = example.myapp.inventory.grpc.SearchRangeRequest.class,
+      responseType = example.myapp.inventory.grpc.SearchRangeResponse.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<example.myapp.inventory.grpc.SearchRangeRequest,
+      example.myapp.inventory.grpc.SearchRangeResponse> getSearchMethod() {
+    io.grpc.MethodDescriptor<example.myapp.inventory.grpc.SearchRangeRequest, example.myapp.inventory.grpc.SearchRangeResponse> getSearchMethod;
+    if ((getSearchMethod = InventoryServiceGrpc.getSearchMethod) == null) {
+      synchronized (InventoryServiceGrpc.class) {
+        if ((getSearchMethod = InventoryServiceGrpc.getSearchMethod) == null) {
+          InventoryServiceGrpc.getSearchMethod = getSearchMethod = 
+              io.grpc.MethodDescriptor.<example.myapp.inventory.grpc.SearchRangeRequest, example.myapp.inventory.grpc.SearchRangeResponse>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "InventoryService", "Search"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  example.myapp.inventory.grpc.SearchRangeRequest.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  example.myapp.inventory.grpc.SearchRangeResponse.getDefaultInstance()))
+                  .setSchemaDescriptor(new InventoryServiceMethodDescriptorSupplier("Search"))
+                  .build();
+          }
+        }
+     }
+     return getSearchMethod;
+  }
+
   /**
    * Creates a new async stub that supports all call types for the service
    */
@@ -249,6 +281,13 @@ public final class InventoryServiceGrpc {
       asyncUnimplementedUnaryCall(getGetDistributionMethod(), responseObserver);
     }
 
+    /**
+     */
+    public void search(example.myapp.inventory.grpc.SearchRangeRequest request,
+        io.grpc.stub.StreamObserver<example.myapp.inventory.grpc.SearchRangeResponse> responseObserver) {
+      asyncUnimplementedUnaryCall(getSearchMethod(), responseObserver);
+    }
+
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
@@ -286,6 +325,13 @@ public final class InventoryServiceGrpc {
                 example.myapp.inventory.grpc.GetDistributionRequest,
                 example.myapp.inventory.grpc.GetDistributionResponse>(
                   this, METHODID_GET_DISTRIBUTION)))
+          .addMethod(
+            getSearchMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                example.myapp.inventory.grpc.SearchRangeRequest,
+                example.myapp.inventory.grpc.SearchRangeResponse>(
+                  this, METHODID_SEARCH)))
           .build();
     }
   }
@@ -347,6 +393,14 @@ public final class InventoryServiceGrpc {
       asyncUnaryCall(
           getChannel().newCall(getGetDistributionMethod(), getCallOptions()), request, responseObserver);
     }
+
+    /**
+     */
+    public void search(example.myapp.inventory.grpc.SearchRangeRequest request,
+        io.grpc.stub.StreamObserver<example.myapp.inventory.grpc.SearchRangeResponse> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(getSearchMethod(), getCallOptions()), request, responseObserver);
+    }
   }
 
   /**
@@ -400,6 +454,13 @@ public final class InventoryServiceGrpc {
     public example.myapp.inventory.grpc.GetDistributionResponse getDistribution(example.myapp.inventory.grpc.GetDistributionRequest request) {
       return blockingUnaryCall(
           getChannel(), getGetDistributionMethod(), getCallOptions(), request);
+    }
+
+    /**
+     */
+    public example.myapp.inventory.grpc.SearchRangeResponse search(example.myapp.inventory.grpc.SearchRangeRequest request) {
+      return blockingUnaryCall(
+          getChannel(), getSearchMethod(), getCallOptions(), request);
     }
   }
 
@@ -460,6 +521,14 @@ public final class InventoryServiceGrpc {
       return futureUnaryCall(
           getChannel().newCall(getGetDistributionMethod(), getCallOptions()), request);
     }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<example.myapp.inventory.grpc.SearchRangeResponse> search(
+        example.myapp.inventory.grpc.SearchRangeRequest request) {
+      return futureUnaryCall(
+          getChannel().newCall(getSearchMethod(), getCallOptions()), request);
+    }
   }
 
   private static final int METHODID_ADD_INVENTORY_RECORD = 0;
@@ -467,6 +536,7 @@ public final class InventoryServiceGrpc {
   private static final int METHODID_SEARCH_BY_ID = 2;
   private static final int METHODID_SEARCH_BY_KEY_VALUE = 3;
   private static final int METHODID_GET_DISTRIBUTION = 4;
+  private static final int METHODID_SEARCH = 5;
 
   private static final class MethodHandlers<Req, Resp> implements
       io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
@@ -504,6 +574,10 @@ public final class InventoryServiceGrpc {
         case METHODID_GET_DISTRIBUTION:
           serviceImpl.getDistribution((example.myapp.inventory.grpc.GetDistributionRequest) request,
               (io.grpc.stub.StreamObserver<example.myapp.inventory.grpc.GetDistributionResponse>) responseObserver);
+          break;
+        case METHODID_SEARCH:
+          serviceImpl.search((example.myapp.inventory.grpc.SearchRangeRequest) request,
+              (io.grpc.stub.StreamObserver<example.myapp.inventory.grpc.SearchRangeResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -571,6 +645,7 @@ public final class InventoryServiceGrpc {
               .addMethod(getSearchByIDMethod())
               .addMethod(getSearchByKeyValueMethod())
               .addMethod(getGetDistributionMethod())
+              .addMethod(getSearchMethod())
               .build();
         }
       }

@@ -109,7 +109,7 @@ public class InventoryDB {
 
 
     public static class InventoryManager {
-        private HashMap<String, InventoryRecord> inventoryHashMap = new HashMap<>();
+        public HashMap<String, InventoryRecord> inventoryHashMap = new HashMap<>();
 
         // method to populate the inventoryHashMap
         public void addInventoryRecord(String ID, InventoryRecord record) {
@@ -137,6 +137,33 @@ public class InventoryDB {
             return null; // Record not found
         }
 
+//        public <E extends Comparable<E>> InventoryRecord[] search(String Key_Name, E Key_Value_start, E Key_Value_end) {
+//            List<InventoryRecord> matchingRecords = new ArrayList<>();
+//
+//            for (InventoryRecord record : inventoryHashMap.values()) {
+//                E attributeValue = matchRecordAttribute(record, Key_Name);
+//                if (attributeValue != null && isInRange(attributeValue, Key_Value_start, Key_Value_end)) {
+//                    matchingRecords.add(record);
+//                }
+//            }
+//
+//            return matchingRecords.toArray(new InventoryRecord[0]);
+//        }
+//
+//        private <E> boolean isInRange(E value, E start, E end) {
+//            if (value instanceof Comparable) {
+//                Comparable<E> comparableValue = (Comparable<E>) value;
+//
+//                if ((start == null || comparableValue.compareTo(start) >= 0) &&
+//                        (end == null || comparableValue.compareTo(end) <= 0)) {
+//                    return true;
+//                }
+//            }
+//
+//            // Handle non-comparable types or null values
+//            return false;
+//        }
+
         public <E extends Comparable<E>> InventoryRecord[] search(String Key_Name, E Key_Value_start, E Key_Value_end) {
             List<InventoryRecord> matchingRecords = new ArrayList<>();
 
@@ -150,8 +177,38 @@ public class InventoryDB {
             return matchingRecords.toArray(new InventoryRecord[0]);
         }
 
-        private <E extends Comparable<E>> boolean isInRange(E value, E start, E end) {
-            return (start == null || value.compareTo(start) >= 0) && (end == null || value.compareTo(end) <= 0);
+        private <E> boolean isInRange(E value, E start, E end) {
+            if (value instanceof Comparable) {
+                Comparable<E> comparableValue = (Comparable<E>) value;
+
+                // Convert start and end values to the same type as value, if they are not null
+                if (start != null) {
+                    start = (E) convertToComparableType(value, start);
+                }
+                if (end != null) {
+                    end = (E) convertToComparableType(value, end);
+                }
+
+                if ((start == null || comparableValue.compareTo(start) >= 0) &&
+                        (end == null || comparableValue.compareTo(end) <= 0)) {
+                    return true;
+                }
+            }
+
+            // Handle non-comparable types or null values
+            return false;
+        }
+
+        @SuppressWarnings("unchecked")
+        private <E> E convertToComparableType(E value, E original) {
+            if (value instanceof Integer) {
+                return (E) Integer.valueOf(original.toString());
+            } else if (value instanceof Double) {
+                return (E) Double.valueOf(original.toString());
+            }
+            // Add more type conversions if needed
+
+            return original; // Default case
         }
 
 

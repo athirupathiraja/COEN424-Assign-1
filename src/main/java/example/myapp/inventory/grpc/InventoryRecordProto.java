@@ -54,6 +54,16 @@ public final class InventoryRecordProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_GetDistributionResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SearchRangeRequest_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SearchRangeRequest_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_SearchRangeResponse_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_SearchRangeResponse_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -80,18 +90,23 @@ public final class InventoryRecordProto {
       " \001(\t\022\020\n\010keyValue\030\002 \001(\t\"B\n\026GetDistributio" +
       "nRequest\022\017\n\007keyName\030\001 \001(\t\022\027\n\017percentileV" +
       "alue\030\002 \001(\001\"4\n\027GetDistributionResponse\022\031\n" +
-      "\021distributionValue\030\001 \001(\0012\352\002\n\020InventorySe" +
-      "rvice\022H\n\022AddInventoryRecord\022\032.AddInvento" +
-      "ryRecordRequest\032\026.google.protobuf.Empty\022" +
-      "T\n\030UpdateInventoryAttribute\022 .UpdateInve" +
-      "ntoryAttributeRequest\032\026.google.protobuf." +
-      "Empty\0221\n\nSearchByID\022\022.SearchByIDRequest\032" +
-      "\017.SearchResponse\022=\n\020SearchByKeyValue\022\030.S" +
-      "earchByKeyValueRequest\032\017.SearchResponse\022" +
-      "D\n\017GetDistribution\022\027.GetDistributionRequ" +
-      "est\032\030.GetDistributionResponseB6\n\034example" +
-      ".myapp.inventory.grpcB\024InventoryRecordPr" +
-      "otoP\001b\006proto3"
+      "\021distributionValue\030\001 \001(\001\"Q\n\022SearchRangeR" +
+      "equest\022\017\n\007keyName\030\001 \001(\t\022\025\n\rkeyStartValue" +
+      "\030\002 \001(\t\022\023\n\013keyEndValue\030\003 \001(\t\"8\n\023SearchRan" +
+      "geResponse\022!\n\007records\030\001 \003(\0132\020.InventoryR" +
+      "ecord2\237\003\n\020InventoryService\022H\n\022AddInvento" +
+      "ryRecord\022\032.AddInventoryRecordRequest\032\026.g" +
+      "oogle.protobuf.Empty\022T\n\030UpdateInventoryA" +
+      "ttribute\022 .UpdateInventoryAttributeReque" +
+      "st\032\026.google.protobuf.Empty\0221\n\nSearchByID" +
+      "\022\022.SearchByIDRequest\032\017.SearchResponse\022=\n" +
+      "\020SearchByKeyValue\022\030.SearchByKeyValueRequ" +
+      "est\032\017.SearchResponse\022D\n\017GetDistribution\022" +
+      "\027.GetDistributionRequest\032\030.GetDistributi" +
+      "onResponse\0223\n\006Search\022\023.SearchRangeReques" +
+      "t\032\024.SearchRangeResponseB6\n\034example.myapp" +
+      ".inventory.grpcB\024InventoryRecordProtoP\001b" +
+      "\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -154,6 +169,18 @@ public final class InventoryRecordProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_GetDistributionResponse_descriptor,
         new java.lang.String[] { "DistributionValue", });
+    internal_static_SearchRangeRequest_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_SearchRangeRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SearchRangeRequest_descriptor,
+        new java.lang.String[] { "KeyName", "KeyStartValue", "KeyEndValue", });
+    internal_static_SearchRangeResponse_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_SearchRangeResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_SearchRangeResponse_descriptor,
+        new java.lang.String[] { "Records", });
     com.google.protobuf.EmptyProto.getDescriptor();
   }
 

@@ -149,6 +149,34 @@ public class InventoryServer {
 
             responseObserver.onCompleted();
         }
+
+        @Override
+        public void search(SearchRangeRequest request, StreamObserver<SearchRangeResponse> responseObserver) {
+            String keyName = request.getKeyName();
+            String keyStartValue = request.getKeyStartValue();
+            String keyEndValue = request.getKeyEndValue();
+
+            InventoryDB.InventoryRecord[] records = inventoryManager.search(keyName, keyStartValue, keyEndValue);
+
+            SearchRangeResponse.Builder responseBuilder = SearchRangeResponse.newBuilder();
+            for (InventoryDB.InventoryRecord record : records) {
+                responseBuilder.addRecords(InventoryRecord.newBuilder()
+                        .setName(record.name)
+                        .setDescription(record.getDescription())
+                        .setUnitPrice(record.getUnitPrice())
+                        .setQuantityInStock(record.getQuantityInStock())
+                        .setInventoryValue(record.getInventoryValue())
+                        .setReorderLevel(record.getReorderLevel())
+                        .setReorderTimeInDays(record.getReorderTimeInDays())
+                        .setQuantityInReorder(record.getQuantityInReorder())
+                        .setDiscontinued(record.getDiscontinued())
+                        .build());
+            }
+
+            responseObserver.onNext(responseBuilder.build());
+            responseObserver.onCompleted();
+        }
+
     }
 
     public static void main(String[] args) throws Exception {

@@ -50,10 +50,22 @@ message GetDistributionResponse {
   double distributionValue = 1;
 }
 
+message SearchRangeRequest {
+  string keyName = 1;
+  string keyStartValue = 2;
+  string keyEndValue = 3;
+}
+
+message SearchRangeResponse {
+  repeated InventoryRecord records = 1;
+}
+
+
 service InventoryService {
   rpc AddInventoryRecord(AddInventoryRecordRequest) returns (google.protobuf.Empty);
   rpc UpdateInventoryAttribute(UpdateInventoryAttributeRequest) returns (google.protobuf.Empty);
   rpc SearchByID(SearchByIDRequest) returns (SearchResponse);
   rpc SearchByKeyValue(SearchByKeyValueRequest) returns (SearchResponse);
   rpc GetDistribution(GetDistributionRequest) returns (GetDistributionResponse);
+  rpc Search(SearchRangeRequest) returns (SearchRangeResponse);
 }
